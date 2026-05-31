@@ -144,8 +144,18 @@ class PolicyPlayer(Player):
                         and self._team.available_regs is not None
                     ):
                         self._team.current_reg = get_reg_from_format(fmt)
+<<<<<<< Updated upstream
                     team = packed_team or self.next_team
                     await self.ps_client.accept_challenge(username, team)
+=======
+                    if packed_team:
+                        self._current_packed_team = packed_team
+                    else:
+                        self.get_next_team()
+                    await self.ps_client.accept_challenge(
+                        username, self._current_packed_team
+                    )
+>>>>>>> Stashed changes
                     await self._battle_semaphore.acquire()
                     break
         await self._battle_count_queue.join()
@@ -286,6 +296,12 @@ class PolicyPlayer(Player):
         opp_side = PolicyPlayer.embed_side(battle, opp_fake_rating, opp=True)
         a1, a2 = battle.active_pokemon
         o1, o2 = battle.opponent_active_pokemon
+<<<<<<< Updated upstream
+=======
+        assert battle.teampreview == (
+            len([p for p in battle.team.values() if p.selected_in_teampreview]) < 4
+        )
+>>>>>>> Stashed changes
         pokemons = [
             PolicyPlayer.embed_pokemon(
                 p,
@@ -334,8 +350,12 @@ class PolicyPlayer(Player):
         reviving = float(battle.reviving)
         commanding = float(battle.commanding)
         return np.array(
+<<<<<<< Updated upstream
             [*weather, *fields, champions_format, teampreview, reviving, commanding],
             dtype=np.float32,
+=======
+            [*weather, *fields, teampreview, reviving, commanding], dtype=np.float32
+>>>>>>> Stashed changes
         )
 
     @staticmethod
@@ -417,12 +437,19 @@ class PolicyPlayer(Player):
         move_embeds = np.concatenate(move_embeds)
         types = [float(t in pokemon.base_types) for t in PokemonType]
         tera_type = [float(t == pokemon.tera_type) for t in PokemonType]
+<<<<<<< Updated upstream
         base_stats = [s / 255 for s in pokemon.base_stats.values()]
         if from_opponent:
             stats = [-1] * 6
         else:
             stats = [s / 255 for s in pokemon.stats.values() if s is not None]
             assert len(stats) == 6
+=======
+        if from_opponent:
+            stats = [s / 255 for s in pokemon.base_stats.values()]
+        else:
+            stats = [(0 if s is None else s / 255) for s in pokemon.stats.values()]
+>>>>>>> Stashed changes
         gender = [float(g == pokemon.gender) for g in PokemonGender]
         weight = pokemon.weight / 1000
         # volatile fields

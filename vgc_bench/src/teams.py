@@ -62,7 +62,11 @@ class RandomTeamBuilder(Teambuilder):
 
     Attributes:
         teams: List of packed team strings ready for battle (single-reg mode).
+<<<<<<< Updated upstream
         available_regs: List of regulation identifiers when in multi-reg mode.
+=======
+        available_regs: List of regulation letters when in multi-reg mode.
+>>>>>>> Stashed changes
         current_reg: The regulation whose teams will be yielded next.
         toggle: Optional TeamToggle for preventing mirror matches.
     """
@@ -86,8 +90,12 @@ class RandomTeamBuilder(Teambuilder):
         Args:
             run_id: Training run identifier for deterministic team selection.
             num_teams: Number of teams to include in the pool, or None for all.
+<<<<<<< Updated upstream
             reg: VGC regulation identifier (e.g. 'g', 'h', 'i', 'ma'), or None
                 for all.
+=======
+            reg: VGC regulation letter (e.g. 'g', 'h', 'i'), or None for all.
+>>>>>>> Stashed changes
             custom_team_paths: Optional explicit list of team file paths (e.g. for
                 matchup solving). Overrides reg/num_teams selection.
             toggle: Optional TeamToggle to prevent consecutive identical teams.
@@ -148,7 +156,11 @@ class RandomTeamBuilder(Teambuilder):
         Args:
             run_id: Training run identifier for deterministic team selection.
             num_teams: Number of teams to include, or None for all.
+<<<<<<< Updated upstream
             reg: VGC regulation identifier.
+=======
+            reg: VGC regulation letter.
+>>>>>>> Stashed changes
             take_from_end: If True, take teams from end of shuffled list.
             prefer_featured: If True, prefer teams from the featured/ subdirectory,
                 falling back to all teams if it doesn't exist.
@@ -195,7 +207,11 @@ class RandomTeamBuilder(Teambuilder):
         Get all team file paths for a given regulation.
 
         Args:
+<<<<<<< Updated upstream
             reg: VGC regulation identifier (e.g. 'g', 'h', 'i', 'ma').
+=======
+            reg: VGC regulation letter (e.g. 'g', 'h', 'i').
+>>>>>>> Stashed changes
             prefer_featured: If True, only return teams from the featured/ subdirectory.
 
         Returns:
@@ -214,7 +230,11 @@ def get_available_regs() -> list[str]:
     Discover available regulations from the teams directory.
 
     Returns:
+<<<<<<< Updated upstream
         Sorted list of regulation identifiers that have team directories.
+=======
+        Sorted list of regulation letters that have team directories.
+>>>>>>> Stashed changes
     """
     teams_dir = Path("teams")
     return sorted(

@@ -5,11 +5,19 @@ to trajectories, runs a short behavior cloning pretrain, then runs RL
 training initialized from a BC checkpoint downloaded from the model repo.
 """
 
+<<<<<<< Updated upstream
+=======
+import asyncio
+>>>>>>> Stashed changes
 import json
 import pickle
 import socket
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+<<<<<<< Updated upstream
+=======
+from threading import Thread
+>>>>>>> Stashed changes
 
 import numpy as np
 import pytest
@@ -20,7 +28,11 @@ from poke_env.environment import SingleAgentWrapper
 from poke_env.player import RandomPlayer
 from stable_baselines3 import PPO
 
+<<<<<<< Updated upstream
 from vgc_bench.logs2trajs import _init_worker_loop, process_logs
+=======
+from vgc_bench.logs2trajs import process_logs
+>>>>>>> Stashed changes
 from vgc_bench.pretrain import TrajectoryDataset
 from vgc_bench.src.env import ShowdownEnv
 from vgc_bench.src.policy import MaskedActorCriticPolicy
@@ -48,6 +60,15 @@ def trajectories():
     with fixture_path.open() as f:
         logs = json.load(f)
 
+<<<<<<< Updated upstream
+=======
+    def _init_worker_loop():
+        import vgc_bench.logs2trajs as mod
+
+        mod._READER_LOOP = asyncio.new_event_loop()
+        Thread(target=mod._READER_LOOP.run_forever, daemon=True).start()
+
+>>>>>>> Stashed changes
     with ProcessPoolExecutor(max_workers=4, initializer=_init_worker_loop) as executor:
         trajs = process_logs(
             logs, executor, min_rating=None, only_winner=False, strict=False
@@ -94,6 +115,7 @@ class TestPipeline:
         assert isinstance(sample.obs, DictObs)
         assert "observation" in sample.obs._d
         assert "action_mask" in sample.obs._d
+<<<<<<< Updated upstream
         mask = sample.obs._d["action_mask"]
         assert mask.shape[1] == 2 * act_len
         assert np.all(mask[:, 47:87] == 0)
@@ -106,6 +128,10 @@ class TestPipeline:
             )
             == 1
         )
+=======
+        assert sample.obs._d["action_mask"].shape[1] == 2 * act_len
+        assert np.all(sample.obs._d["action_mask"] == 1)
+>>>>>>> Stashed changes
 
         # Create a minimal PPO + BC setup and train 1 epoch
         env = ShowdownEnv(

@@ -31,6 +31,7 @@ def get_regulation_sheets(
 ) -> tuple[list[str], list[str]]:
     """Find featured and regular team sheets for a regulation."""
     reg = regulation.lower()
+<<<<<<< Updated upstream
     if reg == "ma":
         featured = [
             name
@@ -49,6 +50,8 @@ def get_regulation_sheets(
             and "m-a" in name.lower()
         ]
         return featured, regular
+=======
+>>>>>>> Stashed changes
     featured = [
         name
         for name in all_sheets
@@ -308,6 +311,7 @@ def discover_regulations(sheet_names: list[str]) -> list[str]:
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape VGCPastes Teams")
+<<<<<<< Updated upstream
     parser.add_argument(
         "--reg", "-r", help="Regulation id (e.g. G or MA). Omit for all."
     )
@@ -324,6 +328,17 @@ def main():
     validator = TeamValidator()
     try:
         if reg:
+=======
+    parser.add_argument("--reg", "-r", help="Regulation letter (e.g. G). Omit for all.")
+    args = parser.parse_args()
+    Path("teams").mkdir(exist_ok=True)
+    validator = TeamValidator()
+    try:
+        if args.reg:
+            reg = args.reg.strip().upper()
+            if len(reg) != 1 or not reg.isalpha():
+                raise ValueError("--reg must be a single letter")
+>>>>>>> Stashed changes
             scrape_regulation(reg, validator)
         else:
             session = requests.Session()

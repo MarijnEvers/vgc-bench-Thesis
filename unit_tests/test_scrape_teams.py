@@ -74,6 +74,7 @@ class TestGetRegulationSheets:
         featured, regular = get_regulation_sheets([], "G")
         assert featured == []
         assert regular == ["SV Regulation G"]
+<<<<<<< Updated upstream
 
     def test_finds_champions_regular(self):
         sheets = ["Champions M-A", "SV Regulation I", "Reg I Featured Teams"]
@@ -90,3 +91,5 @@ class TestGetRegulationSheets:
         featured, regular = get_regulation_sheets(sheets, "ma")
         assert featured == ["Champions M-A Featured Teams"]
         assert regular == ["Champions M-A"]
+=======
+>>>>>>> Stashed changes

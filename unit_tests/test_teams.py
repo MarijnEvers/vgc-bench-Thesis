@@ -6,7 +6,10 @@ from vgc_bench.src.teams import (
     calc_team_similarity_score,
     get_available_regs,
 )
+<<<<<<< Updated upstream
 from vgc_bench.src.utils import format_map
+=======
+>>>>>>> Stashed changes
 
 
 class TestTeamToggle:
@@ -63,8 +66,13 @@ class TestGetAvailableRegs:
         regs = get_available_regs()
         assert len(regs) > 0
         for r in regs:
+<<<<<<< Updated upstream
             assert r.isalpha()
             assert r in format_map
+=======
+            assert len(r) == 1
+            assert r.isalpha()
+>>>>>>> Stashed changes
 
     def test_sorted(self):
         regs = get_available_regs()
