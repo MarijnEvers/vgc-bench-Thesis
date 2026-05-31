@@ -8,9 +8,13 @@ from vgc_bench.src.utils import (
     act_len,
     chunk_obs_len,
     format_map,
+<<<<<<< Updated upstream
     get_reg_from_format,
     glob_obs_len,
     is_vgc_format,
+=======
+    glob_obs_len,
+>>>>>>> Stashed changes
     move_obs_len,
     pokemon_obs_len,
     set_global_seed,
@@ -53,6 +57,7 @@ class TestConstants:
 
     def test_format_map_keys(self):
         for key in format_map:
+<<<<<<< Updated upstream
             assert key.isalpha()
             assert format_map[key].startswith("gen9")
             assert "vgc" in format_map[key]
@@ -70,6 +75,11 @@ class TestConstants:
         assert get_reg_from_format("gen9vgc2025regjbo3") == "j"
         assert get_reg_from_format("gen9championsvgc2026regma") == "ma"
         assert get_reg_from_format("gen9championsvgc2026regmabo3") == "ma"
+=======
+            assert len(key) == 1
+            assert key.isalpha()
+            assert format_map[key].startswith("gen9vgc")
+>>>>>>> Stashed changes
 
 
 class TestSetGlobalSeed:

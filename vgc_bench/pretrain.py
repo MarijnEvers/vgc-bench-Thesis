@@ -51,7 +51,11 @@ class TrajectoryDataset(Dataset):
         """
         Load and return a trajectory by index.
 
+<<<<<<< Updated upstream
         Wraps raw numpy observations into DictObs with a synthetic action
+=======
+        Wraps raw numpy observations into DictObs with an all-ones action
+>>>>>>> Stashed changes
         mask so the trajectory matches the policy's Dict observation space.
 
         Args:
@@ -65,10 +69,19 @@ class TrajectoryDataset(Dataset):
             traj = pickle.load(f)
         obs = traj.obs
         n_steps = obs.shape[0]
+<<<<<<< Updated upstream
         action_mask = np.ones((n_steps, 2 * act_len), dtype=np.float32)
         action_mask[:, 47:87] = 0
         action_mask[:, act_len + 47 : act_len + 87] = 0
         dict_obs = DictObs({"observation": obs, "action_mask": action_mask})
+=======
+        dict_obs = DictObs(
+            {
+                "observation": obs,
+                "action_mask": np.ones((n_steps, 2 * act_len), dtype=np.float32),
+            }
+        )
+>>>>>>> Stashed changes
         return Trajectory(
             obs=dict_obs, acts=traj.acts, infos=traj.infos, terminal=traj.terminal
         )
@@ -158,7 +171,11 @@ def pretrain(
     for label, wr in win_rates.items():
         bc.logger.record(f"eval/heuristic{label}", wr)
     ppo.save(save_dir / "0")
+<<<<<<< Updated upstream
     for i in range(1, num_epochs + 1):
+=======
+    for i in range(num_epochs):
+>>>>>>> Stashed changes
         data = iter(dataloader)
         for _ in range(div_count):
             demos = next(data)
@@ -167,7 +184,11 @@ def pretrain(
         win_rates = Callback.compare(eval_agent, eval_opponent, 100)
         for label, wr in win_rates.items():
             bc.logger.record(f"eval/heuristic{label}", wr)
+<<<<<<< Updated upstream
         ppo.save(save_dir / str(i))
+=======
+        ppo.save(save_dir / f"{i + 1}")
+>>>>>>> Stashed changes
     bc.train(n_epochs=1)
 
 

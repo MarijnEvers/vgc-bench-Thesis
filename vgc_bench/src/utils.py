@@ -87,7 +87,11 @@ def set_global_seed(seed: int) -> None:
 
 # observation length constants
 act_len = 107
+<<<<<<< Updated upstream
 glob_obs_len = len(Field) + len(Weather) + 4
+=======
+glob_obs_len = len(Field) + len(Weather) + 3
+>>>>>>> Stashed changes
 side_obs_len = len(SideCondition) + 5
 move_obs_len = len(MoveCategory) + len(Target) + len(PokemonType) + 12
 pokemon_obs_len = (
@@ -96,7 +100,11 @@ pokemon_obs_len = (
     + len(PokemonGender)
     + 2 * len(PokemonType)
     + len(Status)
+<<<<<<< Updated upstream
     + 45
+=======
+    + 39
+>>>>>>> Stashed changes
 )
 chunk_obs_len = glob_obs_len + side_obs_len + pokemon_obs_len
 
@@ -112,18 +120,30 @@ format_map = {
     "h": "gen9vgc2024regh",
     "i": "gen9vgc2025regi",
     "j": "gen9vgc2025regj",
+<<<<<<< Updated upstream
     "ma": "gen9championsvgc2026regma",
+=======
+>>>>>>> Stashed changes
 }
 
 
 def is_vgc_format(fmt: str) -> bool:
     """Check if a format string is a recognized VGC format."""
+<<<<<<< Updated upstream
     return bool(re.match(r"gen9(?:champions)?vgc\d{4}reg(ma|[a-j])(?:bo\d+)?$", fmt))
 
 
 def get_reg_from_format(fmt: str) -> str:
     """Extract the regulation identifier from a VGC format string"""
     m = re.match(r"gen9(?:champions)?vgc\d{4}reg(ma|[a-j])(?:bo\d+)?$", fmt)
+=======
+    return bool(re.match(r"gen9vgc\d{4}reg[a-j]", fmt))
+
+
+def get_reg_from_format(fmt: str) -> str:
+    """Extract the regulation letter from a VGC format string"""
+    m = re.match(r"gen9vgc\d{4}reg([a-j])", fmt)
+>>>>>>> Stashed changes
     assert m is not None, f"not a valid VGC format: {fmt}"
     return m.group(1)
 
